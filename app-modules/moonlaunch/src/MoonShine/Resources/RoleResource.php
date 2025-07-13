@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace Estivenm0\Moonlaunch\MoonShine\Resources;
 
-use App\Models\Role;
-use App\Traits\Properties;
+use Estivenm0\Moonlaunch\Models\Role;
+use Estivenm0\Moonlaunch\Traits\Properties;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Enums\Action;
@@ -33,9 +33,9 @@ class RoleResource extends ModelResource
 
     public function __construct()
     {
-        $this->title(__('moonshine::ui.resource.role'))
+        $this->title(__('moonlaunch::ui.resource.role'))
+            ->redirectAfterSave(PageType::FORM)
             ->itemsPerPage(10)
-            ->redirectAfterSave(PageType::INDEX)
             ->column('name');
     }
 
@@ -51,7 +51,7 @@ class RoleResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('moonshine::ui.resource.role_name'), 'name'),
+            Text::make(__('moonlaunch::ui.resource.role_name'), 'name'),
         ];
     }
 
@@ -63,7 +63,7 @@ class RoleResource extends ModelResource
         return [
             Box::make([
                 ID::make()->sortable(),
-                Text::make(__('moonshine::ui.resource.role_name'), 'name')
+                Text::make(__('moonlaunch::ui.resource.role_name'), 'name')
                     ->required(),
             ]),
         ];

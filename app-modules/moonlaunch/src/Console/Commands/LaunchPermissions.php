@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Estivenm0\Moonlaunch\Console\Commands;
 
-use App\Services\Orion;
+use Estivenm0\Moonlaunch\Services\Launch;
 use Illuminate\Console\Command;
 
-class OrionPermissions extends Command
+class LaunchPermissions extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'orion:permissions';
+    protected $signature = 'launch:permissions';
 
     /**
      * The console command description.
@@ -24,25 +24,13 @@ class OrionPermissions extends Command
     /**
      * Execute the console command.
      */
-    public function handle(Orion $orion)
+    public function handle(Launch $launch)
     {
-        foreach ($orion->getResources() as $item) {
+        foreach ($launch->getResources() as $item) {
             $this->call('moonshine-rbac:permissions', [
                 'resourceName' => class_basename($item),
             ]);
         }
-
-        $this->call('moonshine-rbac:permissions', [
-            'resourceName' => 'AdminResource',
-        ]);
-
-        $this->call('moonshine-rbac:permissions', [
-            'resourceName' => 'RoleResource',
-        ]);
-
-        $this->call('moonshine-rbac:permissions', [
-            'resourceName' => 'PermissionResource',
-        ]);
 
         // $this->call('moonshine-rbac:permissions', [
         //     'resourceName' => ''

@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use App\MoonShine\Resources\AdminResource;
-use App\MoonShine\Resources\RoleResource;
-use App\Services\Orion;
+use Estivenm0\Moonlaunch\Services\Launch;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\MenuManager\MenuGroup;
-use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Favicon;
 use MoonShine\UI\Components\Layout\Footer;
 use MoonShine\UI\Components\Layout\Layout;
-use Sweet1s\MoonshineRBAC\Resource\PermissionResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -49,23 +44,7 @@ final class MoonShineLayout extends AppLayout
     protected function menu(): array
     {
         return [
-            app(Orion::class)->getMenu(),
-
-            MenuGroup::make('system', [
-                MenuItem::make('admins_title', AdminResource::class)
-                    ->translatable('moonshine::ui.resource'),
-
-                MenuItem::make('role', RoleResource::class)
-                    ->translatable('moonshine::ui.resource'),
-
-                MenuItem::make('permissions', PermissionResource::class)
-                    ->translatable('moonshine-rbac::ui')
-                    ->icon('s.shield-check'),
-
-            ])
-                ->translatable('moonshine::ui.resource')
-                ->icon('m.cube'),
-
+            ...app(Launch::class)->getMenu(),
         ];
     }
 

@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources;
+namespace Estivenm0\Moonlaunch\MoonShine\Resources;
 
-use App\Models\Role;
 use App\Models\User;
-use App\Traits\Properties;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Estivenm0\Moonlaunch\Traits\Properties;
 use Illuminate\Validation\Rule;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
@@ -43,16 +41,11 @@ class AdminResource extends ModelResource
 
     public function __construct()
     {
-        $this->title(__('moonshine::ui.resource.admins_title'))
-            ->columnSelection(true)
+        $this->title(__('moonlaunch::ui.resource.admins_title'))
+            ->columnSelection()
             ->with(['roles'])
             ->column('name')
             ->isAsync(false);
-    }
-
-    protected function modifyQueryBuilder(Builder $builder): Builder
-    {
-        return $builder->whereHas('roles');
     }
 
     /**
@@ -64,20 +57,20 @@ class AdminResource extends ModelResource
         return [
             ID::make()->sortable(),
 
-            //  Image::make(__('moonshine::ui.resource.avatar'), 'avatar')
+            //  Image::make(__('moonlaunch::ui.resource.avatar'), 'avatar')
             //     ->modifyRawValue(fn(?string $raw): string => $raw ?? ''),
 
-            Text::make(__('moonshine::ui.resource.name'), 'name'),
+            Text::make(__('moonlaunch::ui.resource.name'), 'name'),
 
-            BelongsToMany::make(__('moonshine::ui.resource.role'), 'roles')
+            BelongsToMany::make(__('moonlaunch::ui.resource.role'), 'roles')
                 ->inLine(
                     separator: ' ',
                     badge: fn ($model, $value) => Badge::make((string) $value, 'primary'),
                 ),
 
-            Email::make(__('moonshine::ui.resource.email'), 'email'),
+            Email::make(__('moonlaunch::ui.resource.email'), 'email'),
 
-            Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
+            Date::make(__('moonlaunch::ui.resource.created_at'), 'created_at')
                 ->format('d/M/Y')
                 ->sortable(),
         ];
@@ -88,38 +81,49 @@ class AdminResource extends ModelResource
         return [
             Box::make([
                 Tabs::make([
-                    Tab::make(__('moonshine::ui.resource.main_information'), [
+                    Tab::make(__('moonlaunch::ui.resource.main_information'), [
                         ID::make()->sortable(),
 
                         Flex::make([
-                            Text::make(__('moonshine::ui.resource.name'), 'name')
+                            Text::make(__('moonlaunch::ui.resource.name'), 'name')
                                 ->required(),
 
-                            Email::make(__('moonshine::ui.resource.email'), 'email')
+                            Email::make(__('moonlaunch::ui.resource.email'), 'email')
                                 ->required(),
                         ]),
 
-                        // Image::make(__('moonshine::ui.resource.avatar'), 'avatar')
+                        // Image::make(__('moonlaunch::ui.resource.avatar'), 'avatar')
                         //     ->disk(moonshineConfig()->getDisk())
                         //     ->dir('moonshine_users')
                         //     ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
 
-                        Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
+                        Flex::make([
+                            Password::make(__('moonlaunch::ui.resource.password'), 'password')
+                                ->customAttributes(['autocomplete' => 'new-password'])
+                                ->eye(),
+
+                            PasswordRepeat::make(__('moonlaunch::ui.resource.repeat_password'), 'password_repeat')
+                                ->customAttributes(['autocomplete' => 'confirm-password'])
+                                ->eye(),
+                        ])->canSee(fn () => ! $this->item),
+
+                        Date::make(__('moonlaunch::ui.resource.created_at'), 'created_at')
                             ->format('d.m.Y')
                             ->default(now()->toDateTimeString()),
                     ])->icon('user-circle'),
 
-                    Tab::make(__('moonshine::ui.resource.password'), [
-                        Collapse::make(__('moonshine::ui.resource.change_password'), [
-                            Password::make(__('moonshine::ui.resource.password'), 'password')
+                    Tab::make(__('moonlaunch::ui.resource.password'), [
+                        Collapse::make(__('moonlaunch::ui.resource.change_password'), [
+                            Password::make(__('moonlaunch::ui.resource.password'), 'password')
                                 ->customAttributes(['autocomplete' => 'new-password'])
                                 ->eye(),
 
-                            PasswordRepeat::make(__('moonshine::ui.resource.repeat_password'), 'password_repeat')
+                            PasswordRepeat::make(__('moonlaunch::ui.resource.repeat_password'), 'password_repeat')
                                 ->customAttributes(['autocomplete' => 'confirm-password'])
                                 ->eye(),
                         ])->icon('lock-closed'),
-                    ])->icon('lock-closed'),
+                    ])->canSee(fn () => $this->item)
+                        ->icon('lock-closed'),
                 ]),
             ]),
         ];
@@ -165,7 +169,7 @@ class AdminResource extends ModelResource
     protected function filters(): iterable
     {
         return [
-            BelongsToMany::make(__('moonshine::ui.resource.role'), 'roles'),
+            BelongsToMany::make(__('moonlaunch::ui.resource.role'), 'roles'),
         ];
     }
 }

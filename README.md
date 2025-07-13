@@ -1,79 +1,86 @@
-# Orion: Starter Kit 🚀
+# Orion: Starter Kit para Laravel MoonShine 🚀
 
-**Orion** es un Starter Kit listo para usar, diseñado para acelerar el desarrollo de paneles de administración en Laravel utilizando [MoonShine](https://moonshine-laravel.com/), un potente y flexible paquete de administración.
+**Orion** es un proyecto inicial modular que acelera el desarrollo de paneles administrativos en Laravel utilizando [MoonShine](https://moonshine-laravel.com/) como framework administrativo.
 
----
+## 📦 Tecnologías principales
 
-## ✨ Características principales
+| Paquete                     | Versión | Descripción                 |
+| --------------------------- | ------- | --------------------------- |
+| Laravel                     | v11     | Framework PHP base          |
+| MoonShine                   | v3      | Panel administrativo        |
+| moonshine-roles-permissions | v3      | Sistema de roles y permisos |
+| internachi/modular          | v2      | Arquitectura modular        |
 
-- 🛠️ Configuración predeterminada de **MoonShine**.
-- 🔐 Integración de permisos basada en roles con [moonshine-roles-permissions](https://github.com/SWEET1S/moonshine-roles-permissions).
-- 🎨 Dos temas de color preconfigurados listos para usar.
-- 🌐 Soporte completo para idioma **español**.
-- ⚙️ Comando para generar automáticamente todos los permisos de los recursos.
-- 🔁 Trait `Properties` para definir propiedades encadenadas en los recursos.
+## ✨ Características destacadas
 
-> **Nota:** En el archivo config/orion.php puede configurar con true o false dependiendo que apartados quiere que se muestren o no.
+### 🛠 Configuración base
 
----
+-   Preconfiguración completa de MoonShine
+-   Arquitectura modular lista para usar
 
-## 🎨 Temas disponibles
+### 🔐 Seguridad
 
-| ![theme1](./.docs/theme1.png) | ![theme2](./.docs/theme2.png) |
-|------------------------------|-------------------------------|
+-   Sistema RBAC (Roles y Permisos) integrado
+-   Comando para generación automática de permisos
 
----
+el comando para la generación de permisos es: [LaunchPermissions](app-modules/moonlaunch/src/Console/Commands/LaunchPermissions.php) allí haces lo siguiente para crear los permisos de un recurso
 
-## 📦 Tecnologías
+```bash
+   $this->call('moonshine-rbac:permissions', [
+        'resourceName' => 'AdminResource'
+     ]);
+```
 
-| Paquete                     | Versión |
-|----------------------------|---------|
-| Laravel                    | v11     |
-| MoonShine                  | v3      |
-| moonshine-roles-permissions | v3      |
+### 🎨 Interfaz
 
----
+-   2 temas visuales preinstalados
+-   Soporte para español e inglés
 
+## 🖼 Vista previa de temas
+
+| Tema Claro                    | Tema Oscuro                   |
+| ----------------------------- | ----------------------------- |
+| ![Tema 1](./_docs/theme1.png) | ![Tema 2](./_docs/theme2.png) |
+
+los temas los cambias en MoonShineServiceProvider
+
+```bash
+  (new ThemeApplier($colorManager))->theme1();
+  (new ThemeApplier($colorManager))->theme2();
+```
 
 ## 🚀 Instalación
 
-Sigue estos pasos para ejecutar el proyecto localmente:
+1. Clonar repositorio:
 
-1. Clona el repositorio
-   ```bash
-   git clone https://github.com/estivenm0/orion.git
-    ```
-2. Navega al directorio raíz del proyecto
-    ```sh
+    ```bash
+    git clone https://github.com/estivenm0/orion.git
     cd orion
     ```
 
-3. Copia el archivo `.env.example` a `.env`
-    ```sh
-    cp .env.example .env
-    ```
+2. Configurar entorno:
 
-4. Instala las dependencias
-    ```sh
+    ```bash
+    cp .env.example .env
     composer install
     ```
 
-5. Genera la clave de la aplicación
-    ```sh
-    php artisan key:generate
+3. Ejecutar instalador:
+    ```bash
+    php artisan launch:install
     ```
 
-6. Ejecuta las migraciones
-    ```sh
-    php artisan migrate
-    ```
+El instalador ejecuta automáticamente:
 
-7. Genera los permisos y crea un rol Super Admin
-    ```sh
-    php artisan orion:permissions
-    ```
+-   Generación de clave de aplicación
+-   Migraciones de base de datos
+-   Creación de permisos y rol superadmin
+-   Creación de usuario inicial
 
-8. Crea un Usuario
-    ```sh
-    php artisan moonshine-rbac:user
-    ```
+---
+
+📘 **Documentación adicional**:
+
+-   [moonshine](https://moonshine-laravel.com/docs)
+-   [moonshine-roles-permissions](https://github.com/SWEET1S/moonshine-roles-permissions/)
+-   [modular](https://github.com/InterNACHI/modular)
