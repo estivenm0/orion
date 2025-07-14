@@ -4,6 +4,7 @@ namespace Estivenm0\Moonlaunch\Console\Commands;
 
 use Estivenm0\Moonlaunch\Services\Launch;
 use Illuminate\Console\Command;
+use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 
 class LaunchPermissions extends Command
 {
@@ -19,21 +20,21 @@ class LaunchPermissions extends Command
      *
      * @var string
      */
-    protected $description = 'Generates the permissions for the resources specified in the handle method by executing multiple related commands.';
+    protected $description = 'Generates the permissions for the resources registered in moonshine';
 
     /**
      * Execute the console command.
      */
-    public function handle(Launch $launch)
+    public function handle(CoreContract $moonshine)
     {
-        foreach ($launch->getResources() as $item) {
+        foreach ($moonshine->getResources() as $item) {
             $this->call('moonshine-rbac:permissions', [
                 'resourceName' => class_basename($item),
             ]);
         }
 
         // $this->call('moonshine-rbac:permissions', [
-        //     'resourceName' => ''
+        //     'resourceName' => 'ExampleResource'
         // ]);
 
         $this->call('moonshine-rbac:role', [

@@ -23,13 +23,8 @@
 -   Sistema RBAC (Roles y Permisos) integrado
 -   Comando para generación automática de permisos
 
-el comando para la generación de permisos es: [LaunchPermissions](app-modules/moonlaunch/src/Console/Commands/LaunchPermissions.php) allí haces lo siguiente para crear los permisos de un recurso
 
-```bash
-   $this->call('moonshine-rbac:permissions', [
-        'resourceName' => 'AdminResource'
-     ]);
-```
+Los permisos se generan automáticamente usando el comando [`LaunchPermissions`](app-modules/moonlaunch/src/Console/Commands/LaunchPermissions.php). Este comando toma los **recursos registrados en MoonShine** y crea los permisos necesarios de forma automática.
 
 ### 🎨 Interfaz
 

@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'info' => 'Información del sistema',
-    'users' => 'Usuarios',
     'resource' => [
         'system' => 'Sistema',
         'role' => 'Roles',
