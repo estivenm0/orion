@@ -33,7 +33,7 @@ Los permisos se generan automáticamente usando el comando [`LaunchPermissions`]
 
 ## 🖼 Vista previa de temas
 
-| Tema Claro                    | Tema Oscuro                   |
+| Tema 1                        | Tema 2                        |
 | ----------------------------- | ----------------------------- |
 | ![Tema 1](./_docs/theme1.png) | ![Tema 2](./_docs/theme2.png) |
 

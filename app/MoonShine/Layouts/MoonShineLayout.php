@@ -36,7 +36,7 @@ final class MoonShineLayout extends AppLayout
     {
         return Footer::make()
             ->copyright(
-                fn (): string => 'Credits To <a href="https://moonshine-laravel.com/" target="_blank">MoonShine</a>'
+                fn (): string => 'ORION'
             )
             ->menu($this->getFooterMenu());
     }

@@ -2,7 +2,6 @@
 
 namespace Estivenm0\Moonlaunch\Console\Commands;
 
-use Estivenm0\Moonlaunch\Services\Launch;
 use Illuminate\Console\Command;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 
