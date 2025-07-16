@@ -27,7 +27,7 @@ class Launch
                 MenuItem::make('admins_title', AdminResource::class)
                     ->translatable('moonlaunch::ui.resource'),
 
-                MenuItem::make('role', RoleResource::class)
+                MenuItem::make('roles', RoleResource::class)
                     ->translatable('moonlaunch::ui.resource'),
 
                 MenuItem::make('permissions', PermissionResource::class)

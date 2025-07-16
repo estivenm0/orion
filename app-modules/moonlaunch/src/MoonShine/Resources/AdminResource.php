@@ -57,20 +57,20 @@ class AdminResource extends ModelResource
         return [
             ID::make()->sortable(),
 
-            //  Image::make(__('moonlaunch::ui.resource.avatar'), 'avatar')
+            //  Image::make('avatar')->translatable('moonlaunch::ui.resource')
             //     ->modifyRawValue(fn(?string $raw): string => $raw ?? ''),
 
-            Text::make(__('moonlaunch::ui.resource.name'), 'name'),
+            Text::make('name')->translatable('moonlaunch::ui.resource'),
 
-            BelongsToMany::make(__('moonlaunch::ui.resource.role'), 'roles')
+            BelongsToMany::make('roles')->translatable('moonlaunch::ui.resource')
                 ->inLine(
                     separator: ' ',
                     badge: fn ($model, $value) => Badge::make((string) $value, 'primary'),
                 ),
 
-            Email::make(__('moonlaunch::ui.resource.email'), 'email'),
+            Email::make('email')->translatable('moonlaunch::ui.resource'),
 
-            Date::make(__('moonlaunch::ui.resource.created_at'), 'created_at')
+            Date::make('created_at')->translatable('moonlaunch::ui.resource')
                 ->format('d/M/Y')
                 ->sortable(),
         ];
@@ -85,40 +85,42 @@ class AdminResource extends ModelResource
                         ID::make()->sortable(),
 
                         Flex::make([
-                            Text::make(__('moonlaunch::ui.resource.name'), 'name')
+                            Text::make('name')->translatable('moonlaunch::ui.resource')
                                 ->required(),
 
-                            Email::make(__('moonlaunch::ui.resource.email'), 'email')
+                            Email::make('email')->translatable('moonlaunch::ui.resource')
                                 ->required(),
                         ]),
 
-                        // Image::make(__('moonlaunch::ui.resource.avatar'), 'avatar')
+                        // Image::make('avatar')->translatable('moonlaunch::ui.resource')
                         //     ->disk(moonshineConfig()->getDisk())
                         //     ->dir('moonshine_users')
                         //     ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
 
                         Flex::make([
-                            Password::make(__('moonlaunch::ui.resource.password'), 'password')
+                            Password::make('password')->translatable('moonlaunch::ui.resource')
                                 ->customAttributes(['autocomplete' => 'new-password'])
                                 ->eye(),
 
-                            PasswordRepeat::make(__('moonlaunch::ui.resource.repeat_password'), 'password_repeat')
+                            PasswordRepeat::make('password_repeat')
+                                ->translatable('moonlaunch::ui.resource')
                                 ->customAttributes(['autocomplete' => 'confirm-password'])
                                 ->eye(),
                         ])->canSee(fn () => ! $this->item),
 
-                        Date::make(__('moonlaunch::ui.resource.created_at'), 'created_at')
+                        Date::make('created_at')->translatable('moonlaunch::ui.resource')
                             ->format('d.m.Y')
                             ->default(now()->toDateTimeString()),
                     ])->icon('user-circle'),
 
                     Tab::make(__('moonlaunch::ui.resource.password'), [
                         Collapse::make(__('moonlaunch::ui.resource.change_password'), [
-                            Password::make(__('moonlaunch::ui.resource.password'), 'password')
+                            Password::make('password')->translatable('moonlaunch::ui.resource')
                                 ->customAttributes(['autocomplete' => 'new-password'])
                                 ->eye(),
 
-                            PasswordRepeat::make(__('moonlaunch::ui.resource.repeat_password'), 'password_repeat')
+                            PasswordRepeat::make('password_repeat')
+                                ->translatable('moonlaunch::ui.resource')
                                 ->customAttributes(['autocomplete' => 'confirm-password'])
                                 ->eye(),
                         ])->icon('lock-closed'),
@@ -169,7 +171,7 @@ class AdminResource extends ModelResource
     protected function filters(): iterable
     {
         return [
-            BelongsToMany::make(__('moonlaunch::ui.resource.role'), 'roles'),
+            BelongsToMany::make('roles')->translatable('moonlaunch::ui.resource'),
         ];
     }
 }

@@ -1,80 +1,75 @@
-# Orion: Starter Kit para Laravel MoonShine 🚀
+# Orion: Starter Kit for Laravel MoonShine 🚀
 
-**Orion** es un proyecto inicial modular que acelera el desarrollo de paneles administrativos en Laravel utilizando [MoonShine](https://moonshine-laravel.com/) como framework administrativo.
+**Orion** is a modular starter project that speeds up the development of admin panels in Laravel using [MoonShine](https://moonshine-laravel.com/) as the admin framework.
 
-## 📦 Tecnologías principales
+## 📦 Main Technologies
 
-| Paquete                     | Versión | Descripción                 |
-| --------------------------- | ------- | --------------------------- |
-| Laravel                     | v11     | Framework PHP base          |
-| MoonShine                   | v3      | Panel administrativo        |
-| moonshine-roles-permissions | v3      | Sistema de roles y permisos |
-| internachi/modular          | v2      | Arquitectura modular        |
+| Package                     | Version | Description                  |
+| --------------------------- | ------- | ---------------------------- |
+| Laravel                     | v11     | Core PHP framework           |
+| MoonShine                   | v3      | Admin panel                  |
+| moonshine-roles-permissions | v3      | Roles and permissions system |
+| internachi/modular          | v2      | Modular architecture         |
 
-## ✨ Características destacadas
+## ✨ Key Features
 
-### 🛠 Configuración base
+### 🛠 Base Configuration
 
--   Preconfiguración completa de MoonShine
--   Arquitectura modular lista para usar
+-   Fully pre-configured MoonShine
+-   Ready-to-use modular architecture
 
-### 🔐 Seguridad
+### 🔐 Security
 
--   Sistema RBAC (Roles y Permisos) integrado
--   Comando para generación automática de permisos
+-   Integrated RBAC (Roles and Permissions) system
+-   Command for automatic permission generation
+
+Permissions are automatically generated using the [`LaunchPermissions`](app-modules/moonlaunch/src/Console/Commands/LaunchPermissions.php) command. This command scans the **registered MoonShine resources** and creates the necessary permissions automatically.
+
+### 🎨 Interface
+
+-   4 pre-installed visual themes
+-   Support for both English and Spanish
+
+## 🖼 Theme Preview
+
+| Theme 1                           | Theme 2                           | Theme 3                           | Theme 4                           |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| ![Theme 1](./_docs/themes/1.webp) | ![Theme 2](./_docs/themes/2.webp) | ![Theme 3](./_docs/themes/3.webp) | ![Theme 4](./_docs/themes/4.webp) |
+
+Themes can be switched in the [`MoonlaunchServiceProvider`](app-modules/moonlaunch/src/Providers/MoonlaunchServiceProvider.php)
 
 
-Los permisos se generan automáticamente usando el comando [`LaunchPermissions`](app-modules/moonlaunch/src/Console/Commands/LaunchPermissions.php). Este comando toma los **recursos registrados en MoonShine** y crea los permisos necesarios de forma automática.
+## 🚀 Installation
 
-### 🎨 Interfaz
-
--   2 temas visuales preinstalados
--   Soporte para español e inglés
-
-## 🖼 Vista previa de temas
-
-| Tema 1                        | Tema 2                        |
-| ----------------------------- | ----------------------------- |
-| ![Tema 1](./_docs/theme1.png) | ![Tema 2](./_docs/theme2.png) |
-
-los temas los cambias en MoonShineServiceProvider
-
-```bash
-  (new ThemeApplier($colorManager))->theme1();
-  (new ThemeApplier($colorManager))->theme2();
-```
-
-## 🚀 Instalación
-
-1. Clonar repositorio:
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/estivenm0/orion.git
     cd orion
     ```
 
-2. Configurar entorno:
+2. Set up the environment:
 
     ```bash
     cp .env.example .env
     composer install
     ```
 
-3. Ejecutar instalador:
+3. Run the installer:
     ```bash
     php artisan launch:install
     ```
 
-El instalador ejecuta automáticamente:
+The installer will automatically:
 
--   Generación de clave de aplicación
--   Migraciones de base de datos
--   Creación de permisos y rol superadmin
--   Creación de usuario inicial
+-   Generate the application key
+-   Run database migrations
+-   Create permissions and the superadmin role
+-   Create the initial user
 
 ---
 
-📘 **Documentación adicional**:
+📘 **Additional Documentation**:
 
 -   [moonshine](https://moonshine-laravel.com/docs)
 -   [moonshine-roles-permissions](https://github.com/SWEET1S/moonshine-roles-permissions/)

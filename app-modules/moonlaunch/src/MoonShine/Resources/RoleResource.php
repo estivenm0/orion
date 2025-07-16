@@ -33,7 +33,7 @@ class RoleResource extends ModelResource
 
     public function __construct()
     {
-        $this->title(__('moonlaunch::ui.resource.role'))
+        $this->title(__('moonlaunch::ui.resource.roles'))
             ->redirectAfterSave(PageType::FORM)
             ->itemsPerPage(10)
             ->column('name');
@@ -51,7 +51,7 @@ class RoleResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('moonlaunch::ui.resource.role_name'), 'name'),
+            Text::make('name')->translatable('moonlaunch::ui.resource'),
         ];
     }
 
@@ -63,7 +63,7 @@ class RoleResource extends ModelResource
         return [
             Box::make([
                 ID::make()->sortable(),
-                Text::make(__('moonlaunch::ui.resource.role_name'), 'name')
+                Text::make('name')->translatable('moonlaunch::ui.resource')
                     ->required(),
             ]),
         ];

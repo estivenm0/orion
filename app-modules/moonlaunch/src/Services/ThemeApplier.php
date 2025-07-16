@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Estivenm0\Moonlaunch\Services;
 
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 
@@ -31,6 +31,30 @@ class ThemeApplier
             'tableRow' => '#333333',
             'primary' => '#2980b9',
             'secondary' => '#16a085',
+            'stateColor' => '#5d6d7e',
+        ]);
+    }
+
+    public function theme3(): void
+    {
+        $this->applyTheme([
+            'background' => '#1e2420',
+            'content' => '#262c28',
+            'tableRow' => '#323834',
+            'primary' => '#10b981',
+            'secondary' => '#6ee7b7',
+            'stateColor' => '#4b5563',
+        ]);
+    }
+
+    public function theme4(): void
+    {
+        $this->applyTheme([
+            'background' => '#1c1b29',
+            'content' => '#252438',
+            'tableRow' => '#33324d',
+            'primary' => '#8e44ad',
+            'secondary' => '#bb8fce',
             'stateColor' => '#5d6d7e',
         ]);
     }

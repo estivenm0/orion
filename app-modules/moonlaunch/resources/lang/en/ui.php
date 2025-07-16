@@ -3,19 +3,17 @@
 return [
     'resource' => [
         'system' => 'System',
-        'role' => 'Roles',
+        'role' => 'Role',
+        'roles' => 'Roles',
         'name' => 'Name',
-        'email' => 'E-mail',
+        'email' => 'Email',
         'password' => 'Password',
-        'repeat_password' => 'Repeat password',
+        'password_repeat' => 'Repeat Password',
         'avatar' => 'Avatar',
         'created_at' => 'Created At',
-        'admins_title' => 'Admins',
-        'role_title' => 'Roles',
-        'role_name' => 'Title',
+        'admins_title' => 'Administrators',
 
-        'main_information' => 'Main information',
-        'change_password' => 'Change password',
+        'main_information' => 'Main Information',
+        'change_password' => 'Change Password',
     ],
-
 ];
