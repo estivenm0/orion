@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Estivenm0\Moonlaunch\MoonShine\Resources;
 
-use App\Models\User;
+use Estivenm0\Moonlaunch\Models\User;
 use Estivenm0\Moonlaunch\Traits\Properties;
 use Illuminate\Validation\Rule;
 use MoonShine\Contracts\UI\FieldContract;
